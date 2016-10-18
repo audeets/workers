@@ -44,6 +44,16 @@
           }
         },
         "args": {}
+      },
+      {
+        "destination": {
+          "queue": "store-elasticsearch",
+          "messageSchema": {},
+          "options": {
+            "noAck": false
+          }
+        },
+        "args": {}
       }
     ]
   },

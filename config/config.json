@@ -5,8 +5,11 @@
   "mongo": {
     "connect": "mongodb://192.168.99.100/web-audits"
   },
+  "elasticSearch": {
+    "connect": "http://192.168.99.100:9200/"
+  },
   "gpsi": {
-    "api_key": "AIzaSyBlS12_ahTcltvHKkn_rjv278IKQXLSZFg"
+    "apiKey": "AIzaSyBlS12_ahTcltvHKkn_rjv278IKQXLSZFg"
   },
   "logging": {
     "default": {

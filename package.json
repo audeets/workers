@@ -10,10 +10,11 @@
     "test": "npm run coverage && npm run check-coverage",
     "coverage": "istanbul cover node_modules/mocha/bin/_mocha -- --recursive \"./test/unit/**/*Spec.js\"",
     "check-coverage": "istanbul check-coverage --statement 85",
-    "start:all": "start npm run start:gpsi & start npm run start:seobasic & start npm run start:mongo & start npm run start:crawl",
+    "start:all": "start npm run start:gpsi & start npm run start:seobasic & start npm run start:mongo & start npm run start:crawl & start npm run start:elastic",
     "start:gpsi": "node ./bin/services.js start audit-performance-gpsi",
     "start:seobasic": "node ./bin/services.js start audit-search-basic",
     "start:mongo": "node ./bin/services.js start store-mongo",
+    "start:elastic": "node ./bin/services.js start store-elasticsearch",
     "start:crawl": "node ./bin/services.js start crawler",
     "audit": "node ./bin/services.js audit"
   },
