@@ -25,11 +25,4 @@ program
     });
   });
 
-program
-  .command('audit')
-  .description('Runs the audits of all the projects defined in the db')
-  .action(() => {
-    auditor.audit(config.amqp.connect);
-  });
-
 program.parse(process.argv);
