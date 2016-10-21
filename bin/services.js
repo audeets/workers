@@ -7,7 +7,6 @@
 const log = require('./../lib/logger');
 const program = require('commander');
 const queue = require('./../lib/workers-commons/workers');
-const auditor = require('./../lib/auditor');
 
 // End of dependencies.
 
