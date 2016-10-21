@@ -26,7 +26,6 @@
     "__DEV__": true
   },
   "rules": {
-    "valid-jsdoc": ["warn"],
     "no-use-before-define": "off"
   }
 }
