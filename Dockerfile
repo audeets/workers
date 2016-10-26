@@ -8,7 +8,7 @@ COPY . /usr/src/app
 
 # Install app dependencies
 WORKDIR /usr/src/app
-RUN apt-get update -y && apt-get install bzip2 apt-utils fontconfig-config -y \
+RUN apt-get update -y && apt-get install bzip2 apt-utils libfontconfig -y \
     && npm install \
     && chmod -R +w /usr/src/app/log
 
