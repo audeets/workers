@@ -25,13 +25,13 @@ linting:
   stage: test
   script:
     - docker pull $CONTAINER_TEST_IMAGE
-    - docker run $CONTAINER_TEST_IMAGE "npm run lint"
+    - docker run $CONTAINER_TEST_IMAGE npm run lint
 
 ut:
   stage: test
   script:
     - docker pull $CONTAINER_TEST_IMAGE
-    - docker run $CONTAINER_TEST_IMAGE "npm run test"
+    - docker run $CONTAINER_TEST_IMAGE npm run test
 
 push:
   stage: release
