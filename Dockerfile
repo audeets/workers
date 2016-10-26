@@ -12,4 +12,4 @@ RUN apt-get update -y && apt-get install bzip2 -y \
     && npm install \
     && chmod -R +w /usr/src/app/log
 
-VOLUME /usr/src/app/config
+VOLUME /usr/src/app/config /usr/src/app/log
