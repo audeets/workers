@@ -41,7 +41,6 @@
     "node-phantom-simple": "^2.2.4",
     "os": "^0.1.1",
     "phantom": "^2.1.10",
-    "phantomjs": "^2.1.7",
     "rabbitmq-schema": "^1.1.1",
     "recompose": "^0.20.2",
     "traverse": "^0.6.6",
