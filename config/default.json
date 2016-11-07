@@ -5,7 +5,7 @@
   "mongo": {
     "connect": "mongodb://192.168.99.100/web-audits"
   },
-  "elasticSearch": {
+  "elasticsearch": {
     "connect": "http://192.168.99.100:9200/"
   },
   "gpsi": {
