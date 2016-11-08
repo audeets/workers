@@ -23,7 +23,3 @@ COPY . ${appDir}
 RUN chmod -R +w ${appDir}/log
 
 VOLUME ${appDir}/config ${appDir}/log
-
-# Run the image as a non-root user
-RUN adduser --disabled-password myuser
-USER myuser
