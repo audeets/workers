@@ -3,10 +3,10 @@
     "connect": "amqp://192.168.99.100"
   },
   "mongo": {
-    "connect": "mongodb://192.168.99.100/web-audits"
+    "connect": "mongodb://192.168.1.26/web-audits"
   },
   "elasticsearch": {
-    "connect": "http://192.168.99.100:9200/"
+    "connect": "http://192.168.1.26:9210/"
   },
   "gpsi": {
     "apiKey": "AIzaSyBlS12_ahTcltvHKkn_rjv278IKQXLSZFg"
