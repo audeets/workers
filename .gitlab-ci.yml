@@ -59,11 +59,11 @@ staging:
   variables:
     GIT_STRATEGY: none
   script:
-    - upgrade --stack $CI_PROJECT_NAMESPACE-staging --service audit-gpsi
-    - upgrade --stack $CI_PROJECT_NAMESPACE-staging --service audit-seobasic
-    - upgrade --stack $CI_PROJECT_NAMESPACE-staging --service store-mongo
-    - upgrade --stack $CI_PROJECT_NAMESPACE-staging --service store-elasticsearch
-    - upgrade --stack $CI_PROJECT_NAMESPACE-staging --service crawl
+    - upgrade --stack $CI_PROJECT_NAMESPACE-staging --service audit-gpsi --wait-for-upgrade-to-finish --no-start-before-stopping --finish-upgrade
+    - upgrade --stack $CI_PROJECT_NAMESPACE-staging --service audit-seobasic --wait-for-upgrade-to-finish --no-start-before-stopping --finish-upgrade
+    - upgrade --stack $CI_PROJECT_NAMESPACE-staging --service store-mongo --wait-for-upgrade-to-finish --no-start-before-stopping --finish-upgrade
+    - upgrade --stack $CI_PROJECT_NAMESPACE-staging --service store-elasticsearch --wait-for-upgrade-to-finish --no-start-before-stopping --finish-upgrade
+    - upgrade --stack $CI_PROJECT_NAMESPACE-staging --service crawl --wait-for-upgrade-to-finish --no-start-before-stopping --finish-upgrade
     - curl --header 'Access-Token:o.FJG6cnUeuNLWvQYh3oQJwqeGI6ahd7Xs' --header 'Content-Type:application/json' --data-binary '{"body":"services deployed to staging","title":"audeets.com","type":"note"}' --request POST https://api.pushbullet.com/v2/pushes
   only:
     - master
@@ -75,11 +75,11 @@ production:
   variables:
     GIT_STRATEGY: none
   script:
-    - upgrade --stack $CI_PROJECT_NAMESPACE-production --service audit-gpsi
-    - upgrade --stack $CI_PROJECT_NAMESPACE-production --service audit-seobasic
-    - upgrade --stack $CI_PROJECT_NAMESPACE-production --service store-mongo
-    - upgrade --stack $CI_PROJECT_NAMESPACE-production --service store-elasticsearch
-    - upgrade --stack $CI_PROJECT_NAMESPACE-production --service crawl
+    - upgrade --stack $CI_PROJECT_NAMESPACE-production --service audit-gpsi --wait-for-upgrade-to-finish --no-start-before-stopping --finish-upgrade
+    - upgrade --stack $CI_PROJECT_NAMESPACE-production --service audit-seobasic --wait-for-upgrade-to-finish --no-start-before-stopping --finish-upgrade
+    - upgrade --stack $CI_PROJECT_NAMESPACE-production --service store-mongo --wait-for-upgrade-to-finish --no-start-before-stopping --finish-upgrade
+    - upgrade --stack $CI_PROJECT_NAMESPACE-production --service store-elasticsearch --wait-for-upgrade-to-finish --no-start-before-stopping --finish-upgrade
+    - upgrade --stack $CI_PROJECT_NAMESPACE-production --service crawl --wait-for-upgrade-to-finish --no-start-before-stopping --finish-upgrade
     - curl --header 'Access-Token:o.FJG6cnUeuNLWvQYh3oQJwqeGI6ahd7Xs' --header 'Content-Type:application/json' --data-binary '{"body":"services deployed to production","title":"audeets.com","type":"note"}' --request POST https://api.pushbullet.com/v2/pushes
   only:
     - master
