@@ -24,5 +24,5 @@ var ResultSchema = new mongoose.Schema({
   }]
 });
 
-mongoose.model('Result', ResultSchema);
+module.exports = mongoose.model('Result', ResultSchema);
 
