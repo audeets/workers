@@ -4,15 +4,15 @@
  * Module dependencies
  */
 
-var mongoose = require('mongoose');
+import {Schema, model} from 'mongoose';
 
 // end module dependencies
 
-var ResultSchema = new mongoose.Schema({
+var ResultSchema = new Schema({
   timestamp: Date,
   category: String,
   url: String,
-  project: {type: mongoose.Schema.Types.ObjectId, ref: 'Project'},
+  project: {type: Schema.Types.ObjectId, ref: 'Project'},
   rules: [{
     rule: String,
     title: String,
@@ -24,5 +24,5 @@ var ResultSchema = new mongoose.Schema({
   }]
 });
 
-mongoose.model('Result', ResultSchema);
+model('Result', ResultSchema);
 
