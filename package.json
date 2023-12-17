@@ -31,7 +31,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "ejs": "^2.5.2",
-    "googleapis": "^6.1.0",
+    "googleapis": "^129.0.0",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.0.0",
     "lodash": "^4.16.4",
