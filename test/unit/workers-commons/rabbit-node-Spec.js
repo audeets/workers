@@ -124,7 +124,7 @@ describe("rabbit-node", function () {
       expect(channel).to.exist;
       expect(channel).to.not.be.undefined;
       console.log(spy.args[0]);
-      expect(message.content.toString()).to.equal(new Buffer(JSON.stringify(content)).toString())
+      expect(message.content.toString()).to.equal(Buffer.from(JSON.stringify(content)).toString())
     });
     it("should not consume a message when published to an unknown exchange", function () {
       mockAmqp.resetMock();
