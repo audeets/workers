@@ -1,6 +1,5 @@
 FROM node:20.10-alpine3.19
-ENV appDir /usr/src/app
-ENV yarnDir /root/.yarn/bin
+ENV appDir /usr/app
 
 # use changes to package.json to force Docker not to use the cache
 # when we change our application's nodejs dependencies:
@@ -13,5 +12,3 @@ RUN mkdir -p ${appDir} && cp -a /tmp/node_modules ${appDir}/
 WORKDIR ${appDir}
 COPY . ${appDir}
 RUN chmod -R +w ${appDir}/log
-
-VOLUME ${appDir}/config ${appDir}/log
