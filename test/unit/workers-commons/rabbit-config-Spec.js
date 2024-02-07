@@ -1,20 +1,20 @@
-'use strict';
+"use strict";
 
 /**
  * Module dependencies.
  */
 
 const chai = require("chai");
-const proxyquire = require('proxyquire');
-const sinon = require('sinon');
-const config = require('../../../lib/workers-commons/rabbit-config');
-const schema = require('../../../lib/workers-commons/rabbitmq.config.json');
+const proxyquire = require("proxyquire");
+const sinon = require("sinon");
+const config = require("../../../lib/workers-commons/rabbit-config").default;
+const schema = require("../../../lib/workers-commons/rabbitmq.config.json");
 
 // End of dependencies.
 
 const expect = chai.expect;
 chai.should();
-chai.use(require('chai-things'));
+chai.use(require("chai-things"));
 
 describe("rabbit-config", function () {
   describe("#getQueueBinding()", function () {
@@ -34,7 +34,7 @@ describe("rabbit-config", function () {
     });
     it("should return an error if the queue does not exist", function () {
       const spy = sinon.spy();
-      config.getQueueBinding('sdsqdsqd', spy);
+      config.getQueueBinding("sdsqdsqd", spy);
       expect(spy.called).to.equal(true);
       const error = spy.args[0][0];
       expect(error).to.not.equal(null);
@@ -70,7 +70,7 @@ describe("rabbit-config", function () {
     });
     it("should return undefined if the exchange does not exist", function () {
       const spy = sinon.spy();
-      const ex = config.getExchange('sdsqdsqd');
+      const ex = config.getExchange("sdsqdsqd");
       expect(ex).to.be.undefined;
     });
   });

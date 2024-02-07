@@ -1,28 +1,18 @@
-'use strict';
+import { error } from "./../lib/logger";
+import { version, command, parse } from "commander";
+import { createWorker } from "./../lib/workers-commons/workers";
+import { version as _version } from "../package.json";
 
-/**
- * Module dependencies.
- */
-
-const log = require('./../lib/logger');
-const program = require('commander');
-const queue = require('./../lib/workers-commons/workers');
-
-// End of dependencies.
-
-const packageConf = require('../package.json');
 const amqpUrl = process.env.URL_AMQP;
 
-program
-  .version(packageConf.version);
+version(_version);
 
-program
-  .command('start <name>')
-  .description('Starts the queue identified by the given name')
-  .action(name => {
-    queue.createWorker(amqpUrl, name, err => {
-      log.error(err);
+command("start <name>")
+  .description("Starts the queue identified by the given name")
+  .action((name) => {
+    createWorker(amqpUrl, name, (err) => {
+      error(err);
     });
   });
 
-program.parse(process.argv);
+parse(process.argv);

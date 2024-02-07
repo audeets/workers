@@ -1,18 +1,18 @@
-'use strict';
+"use strict";
 
 /**
  * Module dependencies.
  */
 
-const chai = require('chai');
-const sinon = require('sinon');
-const gpsi = require('../../../lib/audit-performance-gpsi/index');
+const chai = require("chai");
+const sinon = require("sinon");
+const gpsi = require("../../../lib/audit-performance-gpsi/index").default;
 
 // End of dependencies.
 
 const expect = chai.expect;
 chai.should();
-chai.use(require('chai-things'));
+chai.use(require("chai-things"));
 
 describe("performance-gpsi", function () {
   describe("#_formatDetails()", function () {
@@ -33,172 +33,171 @@ describe("performance-gpsi", function () {
     });
     it("should return a details object with an no link", function () {
       const details = {
-        format: 'format_text',
+        format: "format_text",
       };
       const results = gpsi._formatDetails(details);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
       expect(results).to.deep.equal({
-        text: 'format_text',
+        text: "format_text",
       });
     });
     it("should return a details object with a text+link", function () {
       const details = {
-        format: 'format_text',
-        args  : [
+        format: "format_text",
+        args: [
           {
-            "type" : "HYPERLINK",
-            "key"  : "LINK",
-            "value": "link_text"
-          }
-        ]
+            type: "HYPERLINK",
+            key: "LINK",
+            value: "link_text",
+          },
+        ],
       };
       const results = gpsi._formatDetails(details);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
       expect(results).to.deep.equal({
-        text: 'format_text',
-        link: 'link_text'
+        text: "format_text",
+        link: "link_text",
       });
     });
     it("should return a details object with a text+link and removes the {{BEGIN_LINK}}", function () {
       const details = {
-        format: 'format_text{{BEGIN_LINK}}',
-        args  : [
+        format: "format_text{{BEGIN_LINK}}",
+        args: [
           {
-            "type" : "HYPERLINK",
-            "key"  : "LINK",
-            "value": "link_text"
-          }
-        ]
+            type: "HYPERLINK",
+            key: "LINK",
+            value: "link_text",
+          },
+        ],
       };
       const results = gpsi._formatDetails(details);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
       expect(results).to.deep.equal({
-        text: 'format_text',
-        link: 'link_text'
+        text: "format_text",
+        link: "link_text",
       });
     });
     it("should return a details object with a text+link with an inserted literal", function () {
       const details = {
-        format: 'format_text{{TEST}}',
-        args  : [
+        format: "format_text{{TEST}}",
+        args: [
           {
-            "type" : "INT_LITERAL",
-            "key"  : "TEST",
-            "value": "text"
-          }
-        ]
+            type: "INT_LITERAL",
+            key: "TEST",
+            value: "text",
+          },
+        ],
       };
       const results = gpsi._formatDetails(details);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
       expect(results).to.deep.equal({
-        text: 'format_texttext',
+        text: "format_texttext",
       });
     });
     it("should replace the bytes value in the text", function () {
       const details = {
-        format: 'format_text {{SIZE_IN_BYTES}}',
-        args  : [
+        format: "format_text {{SIZE_IN_BYTES}}",
+        args: [
           {
-            "type" : "BYTES",
-            "key"  : "SIZE_IN_BYTES",
-            "value": "bytes"
-          }
-        ]
+            type: "BYTES",
+            key: "SIZE_IN_BYTES",
+            value: "bytes",
+          },
+        ],
       };
       const results = gpsi._formatDetails(details);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
       expect(results).to.deep.equal({
-        text: 'format_text bytes',
+        text: "format_text bytes",
       });
     });
     it("should replace the percentage value in the text", function () {
       const details = {
-        format: 'format_text {{PERCENTAGE}}',
-        args  : [
+        format: "format_text {{PERCENTAGE}}",
+        args: [
           {
-            "type" : "PERCENTAGE",
-            "key"  : "PERCENTAGE",
-            "value": "percent"
-          }
-        ]
+            type: "PERCENTAGE",
+            key: "PERCENTAGE",
+            value: "percent",
+          },
+        ],
       };
       const results = gpsi._formatDetails(details);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
       expect(results).to.deep.equal({
-        text: 'format_text percent',
+        text: "format_text percent",
       });
     });
     it("should replace the url value in the text", function () {
       const details = {
-        format: 'format_text {{URL}}',
-        args  : [
+        format: "format_text {{URL}}",
+        args: [
           {
-            "type" : "URL",
-            "key"  : "URL",
-            "value": "url"
-          }
-        ]
+            type: "URL",
+            key: "URL",
+            value: "url",
+          },
+        ],
       };
       const results = gpsi._formatDetails(details);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
       expect(results).to.deep.equal({
-        text: 'format_text url',
-        link: 'url',
+        text: "format_text url",
+        link: "url",
       });
     });
     it("should replace the duration value in the text", function () {
       const details = {
-        format: 'format_text {{LIFETIME}}',
-        args  : [
+        format: "format_text {{LIFETIME}}",
+        args: [
           {
-            "type" : "DURATION",
-            "key"  : "LIFETIME",
-            "value": "duration"
-          }
-        ]
+            type: "DURATION",
+            key: "LIFETIME",
+            value: "duration",
+          },
+        ],
       };
       const results = gpsi._formatDetails(details);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
       expect(results).to.deep.equal({
-        text: 'format_text duration',
+        text: "format_text duration",
       });
     });
-    it('should return a details object with a text if unknown arg type', function () {
+    it("should return a details object with a text if unknown arg type", function () {
       const details = {
-        format: 'format_text',
-        args  : [{type: 'XXXXXXX', key: 'TEST', value: 'text'}]
+        format: "format_text",
+        args: [{ type: "XXXXXXX", key: "TEST", value: "text" }],
       };
-      const results = gpsi._formatDetails(details, () => {
-      });
+      const results = gpsi._formatDetails(details, () => {});
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
       expect(results).to.deep.equal({
-        text: 'format_text',
-      })
+        text: "format_text",
+      });
     });
-    it('should call a callback if unknown arg type', function () {
+    it("should call a callback if unknown arg type", function () {
       const callback = sinon.spy();
-      const type = 'XXXXXXX';
+      const type = "XXXXXXX";
       const details = {
-        format: 'format_text',
-        args  : [{type: type, key: "TEST", value: "text"}]
+        format: "format_text",
+        args: [{ type: type, key: "TEST", value: "text" }],
       };
       const results = gpsi._formatDetails(details, callback);
       expect(results).to.exist;
@@ -210,7 +209,7 @@ describe("performance-gpsi", function () {
   });
   describe("#_formatUrlBlocks()", function () {
     it("should return an empty array", function () {
-      const blocks = {urlBlocks: [{}]};
+      const blocks = { urlBlocks: [{}] };
       const results = gpsi._formatUrlBlocks(blocks);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
@@ -224,7 +223,7 @@ describe("performance-gpsi", function () {
       expect(results).to.be.empty;
     });
     it("should return an empty array", function () {
-      const blocks = {urlBlocks: []};
+      const blocks = { urlBlocks: [] };
       const results = gpsi._formatUrlBlocks(blocks);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
@@ -235,41 +234,45 @@ describe("performance-gpsi", function () {
         urlBlocks: [
           {
             header: {
-              format: '1',
-              args  : [{type: "HYPERLINK", key: "LINK", value: "link_text"}]
+              format: "1",
+              args: [{ type: "HYPERLINK", key: "LINK", value: "link_text" }],
             },
-            urls  : [
+            urls: [
               {
                 result: {
-                  format: '2',
-                  args  : [
-                    {type: "HYPERLINK", key: "LINK", value: "link_text"},
-                    {type: "HYPERLINK", key: "LINK", value: "link_text"}
-                  ]
-                }
+                  format: "2",
+                  args: [
+                    { type: "HYPERLINK", key: "LINK", value: "link_text" },
+                    { type: "HYPERLINK", key: "LINK", value: "link_text" },
+                  ],
+                },
               },
               {
                 result: {
-                  format: '3',
-                  args  : [
-                    {type: "HYPERLINK", key: "LINK", value: "link_text"},
-                    {type: "HYPERLINK", key: "LINK", value: "link_text"}
-                  ]
-                }
+                  format: "3",
+                  args: [
+                    { type: "HYPERLINK", key: "LINK", value: "link_text" },
+                    { type: "HYPERLINK", key: "LINK", value: "link_text" },
+                  ],
+                },
               },
-            ]
+            ],
           },
-        ]
+        ],
       };
       const results = gpsi._formatUrlBlocks(blocks);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
       expect(results).to.deep.equal([
-        {text: '1', link: 'link_text', urls: [
-          {text: '2', link: 'link_text'},
-          {text: '3', link: 'link_text'}
-        ]},
+        {
+          text: "1",
+          link: "link_text",
+          urls: [
+            { text: "2", link: "link_text" },
+            { text: "3", link: "link_text" },
+          ],
+        },
       ]);
     });
   });
@@ -278,13 +281,13 @@ describe("performance-gpsi", function () {
       const rules = {
         GpsiRule1: {
           localizedRuleName: "local name",
-          ruleImpact       : 0,
-          groups           : ["group"],
-          summary          : {
-            format: '1',
-            args  : [{type: "HYPERLINK", key: "LINK", value: "link_text"}]
+          ruleImpact: 0,
+          groups: ["group"],
+          summary: {
+            format: "1",
+            args: [{ type: "HYPERLINK", key: "LINK", value: "link_text" }],
           },
-        }
+        },
       };
       const results = gpsi._format(rules);
       expect(results).to.exist;
@@ -295,22 +298,22 @@ describe("performance-gpsi", function () {
       const rules = {
         GpsiRule1: {
           localizedRuleName: "local name",
-          ruleImpact       : 0,
-          groups           : ["group"],
-          summary          : {
-            format: '1',
-            args  : [{type: "HYPERLINK", key: "LINK", value: "link_text"}]
+          ruleImpact: 0,
+          groups: ["group"],
+          summary: {
+            format: "1",
+            args: [{ type: "HYPERLINK", key: "LINK", value: "link_text" }],
           },
         },
         GpsiRule2: {
           localizedRuleName: "local name",
-          ruleImpact       : 0,
-          groups           : ["group"],
-          summary          : {
-            format: '1',
-            args  : [{type: "HYPERLINK", key: "LINK", value: "link_text"}]
+          ruleImpact: 0,
+          groups: ["group"],
+          summary: {
+            format: "1",
+            args: [{ type: "HYPERLINK", key: "LINK", value: "link_text" }],
           },
-        }
+        },
       };
       const results = gpsi._format(rules);
       expect(results).to.exist;
@@ -321,30 +324,30 @@ describe("performance-gpsi", function () {
       const rules = {
         GpsiRule1: {
           localizedRuleName: "local name",
-          ruleImpact       : 0,
-          groups           : ["group"],
-          summary          : {
-            format: '1',
-            args  : [{type: "HYPERLINK", key: "LINK", value: "link_text"}]
+          ruleImpact: 0,
+          groups: ["group"],
+          summary: {
+            format: "1",
+            args: [{ type: "HYPERLINK", key: "LINK", value: "link_text" }],
           },
-        }
+        },
       };
       const results = gpsi._format(rules);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
-      expect(results[0].rule).to.equal('GpsiRule1');
+      expect(results[0].rule).to.equal("GpsiRule1");
     });
     it("should include set the rules as checked if ruleImpact is 0", function () {
       const rules = {
         GpsiRule1: {
           localizedRuleName: "local name",
-          ruleImpact       : 0,
-          groups           : ["group"],
-          summary          : {
-            format: '1',
-            args  : [{type: "HYPERLINK", key: "LINK", value: "link_text"}]
+          ruleImpact: 0,
+          groups: ["group"],
+          summary: {
+            format: "1",
+            args: [{ type: "HYPERLINK", key: "LINK", value: "link_text" }],
           },
-        }
+        },
       };
       const results = gpsi._format(rules);
       expect(results).to.exist;
@@ -355,13 +358,13 @@ describe("performance-gpsi", function () {
       const rules = {
         GpsiRule1: {
           localizedRuleName: "local name",
-          ruleImpact       : 1,
-          groups           : ["group"],
-          summary          : {
-            format: '1',
-            args  : [{type: "HYPERLINK", key: "LINK", value: "link_text"}]
+          ruleImpact: 1,
+          groups: ["group"],
+          summary: {
+            format: "1",
+            args: [{ type: "HYPERLINK", key: "LINK", value: "link_text" }],
           },
-        }
+        },
       };
       const results = gpsi._format(rules);
       expect(results).to.exist;
@@ -370,7 +373,7 @@ describe("performance-gpsi", function () {
     });
     it("should return an empty object", function () {
       const rules = {
-        GpsiRule1: {}
+        GpsiRule1: {},
       };
       const results = gpsi._format(rules);
       expect(results).to.exist;

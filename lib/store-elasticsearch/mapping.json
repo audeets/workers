@@ -1,19 +1,19 @@
 {
-	"results": {
-		"properties": {
-			"category" : {
-				"type": "string"
-			},
-			"timestamp": {
-				"type": "date"
-			},
-			"url": {
-				"type": "string"
-			},
-			"project": {
-				"type": "string",
-          		"index":  "not_analyzed"
-			}
-		}
-	}
+  "results": {
+    "properties": {
+      "category": {
+        "type": "string"
+      },
+      "timestamp": {
+        "type": "date"
+      },
+      "url": {
+        "type": "string"
+      },
+      "project": {
+        "type": "string",
+        "index": "not_analyzed"
+      }
+    }
+  }
 }
