@@ -1,18 +1,18 @@
-import { error } from "./../lib/logger";
-import { version, command, parse } from "commander";
-import { createWorker } from "./../lib/workers-commons/workers";
-import { version as _version } from "../package.json";
+import log from "./../lib/logger.js";
+import commander from "commander";
+import { createWorker } from "./../lib/workers-commons/workers.js";
+import version from "../package.json" assert { type: "json" };
+// const pjson = require("../package.json");
 
-const amqpUrl = process.env.URL_AMQP;
+commander.version(version);
 
-version(_version);
-
-command("start <name>")
+commander
+  .command("start <name>")
   .description("Starts the queue identified by the given name")
   .action((name) => {
-    createWorker(amqpUrl, name, (err) => {
-      error(err);
+    createWorker(process.env.URL_AMQP, name, (err) => {
+      log.error(err);
     });
   });
 
-parse(process.argv);
+commander.parse(process.argv);
