@@ -1,11 +1,13 @@
 import log from "./../lib/logger.js";
-import commander from "commander";
+import { Command } from "commander";
 import { createWorker } from "./../lib/workers-commons/workers.js";
 import version from "../package.json" assert { type: "json" };
 
-commander.version(version);
+const program = new Command();
 
-commander
+program.version(version);
+
+program
   .command("start <name>")
   .description("Starts the queue identified by the given name")
   .action((name) => {
@@ -14,4 +16,4 @@ commander
     });
   });
 
-commander.parse(process.argv);
+program.parse(process.argv);
