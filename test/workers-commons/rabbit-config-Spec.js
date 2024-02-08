@@ -1,20 +1,11 @@
-"use strict";
+import { expect } from "../chai.js";
+import sinon from "sinon";
+import utilities from "../../lib/utilities.js";
+import config from "../../lib/workers-commons/rabbit-config.js";
 
-/**
- * Module dependencies.
- */
-
-const chai = require("chai");
-const proxyquire = require("proxyquire");
-const sinon = require("sinon");
-const config = require("../../../lib/workers-commons/rabbit-config").default;
-const schema = require("../../../lib/workers-commons/rabbitmq.config.json");
-
-// End of dependencies.
-
-const expect = chai.expect;
-chai.should();
-chai.use(require("chai-things"));
+const schema = utilities.loadJsonFileFromCwd(
+  "lib/workers-commons/rabbitmq.config.json"
+);
 
 describe("rabbit-config", function () {
   describe("#getQueueBinding()", function () {

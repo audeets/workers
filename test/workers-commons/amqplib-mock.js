@@ -1,59 +1,63 @@
-"use strict";
-
 var exchanges = {};
 var queues = {};
 
-function connect(url, options, connCallback) {
+export function connect(url, options, connCallback) {
   if (!connCallback) {
     connCallback = options;
     options = {};
   }
   var createChannel = function (channelCallback) {
-
     var channel = {
       assertQueue: function (queue, qOptions, qCallback) {
-        qCallback = qCallback || function () {
-          };
+        qCallback = qCallback || function () {};
         setIfUndef(queues, queue, {
-          messages   : [],
+          messages: [],
           subscribers: [],
-          options    : qOptions
+          options: qOptions,
         });
-        qCallback(null, {queue});
+        qCallback(null, { queue });
       },
 
       assertExchange: function (exchange, exchType, exchOptions) {
-        setIfUndef(exchanges, exchange, {bindings: [], options: exchOptions});
+        setIfUndef(exchanges, exchange, { bindings: [], options: exchOptions });
         //return exchCallback && exchCallback();
       },
 
       bindQueue: function (queue, exchange, key, args, bindCallback) {
-        bindCallback = bindCallback || function () {
-          };
-        if (!exchanges[exchange]) return bindCallback("Bind to non-existing exchange " + exchange);
-        var re = "^" + key.replace(".", "\\.").replace("#", "(\\w|\\.)+").replace("*", "\\w+") + "$";
+        bindCallback = bindCallback || function () {};
+        if (!exchanges[exchange])
+          return bindCallback("Bind to non-existing exchange " + exchange);
+        var re =
+          "^" +
+          key
+            .replace(".", "\\.")
+            .replace("#", "(\\w|\\.)+")
+            .replace("*", "\\w+") +
+          "$";
         exchanges[exchange].bindings.push({
-          regex    : new RegExp(re),
-          queueName: queue
+          regex: new RegExp(re),
+          queueName: queue,
         });
         bindCallback();
       },
 
       publish: function (exchange, routingKey, content, props, pubCallback) {
-        pubCallback = pubCallback || function () {
-          };
-        if (!exchanges[exchange]) return pubCallback("Publish to non-existing exchange " + exchange);
+        pubCallback = pubCallback || function () {};
+        if (!exchanges[exchange])
+          return pubCallback("Publish to non-existing exchange " + exchange);
         var bindings = exchanges[exchange].bindings;
         var matchingBindings = bindings.filter(function (b) {
           return b.regex.test(routingKey);
         });
         matchingBindings.forEach(function (binding) {
-          var subscribers = queues[binding.queueName] ? queues[binding.queueName].subscribers : [];
+          var subscribers = queues[binding.queueName]
+            ? queues[binding.queueName].subscribers
+            : [];
           subscribers.forEach(function (sub) {
             var message = {
-              fields    : {routingKey: routingKey},
+              fields: { routingKey: routingKey },
               properties: props,
-              content   : content
+              content: content,
             };
             sub(message);
           });
@@ -71,37 +75,29 @@ function connect(url, options, connCallback) {
         });
       },
 
-      ack     : function () {
-      },
-      nack    : function () {
-      },
-      prefetch: function () {
-      },
-      on      : function () {
-      }
+      ack: function () {},
+      nack: function () {},
+      prefetch: function () {},
+      on: function () {},
     };
     channelCallback(null, channel);
   };
 
   var connection = {
-    createChannel       : createChannel,
+    createChannel: createChannel,
     createConfirmChannel: createChannel,
-    on                  : function () {
-    }
+    on: function () {},
   };
 
   connCallback(null, connection);
-
 }
 
-function resetMock() {
+export function resetMock() {
   setImmediate(function () {
     queues = {};
     exchanges = {};
   });
 }
-
-module.exports = {connect: connect, resetMock: resetMock};
 
 function setIfUndef(object, prop, value) {
   if (!object[prop]) {

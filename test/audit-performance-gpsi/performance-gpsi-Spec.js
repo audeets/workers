@@ -1,32 +1,20 @@
-"use strict";
-
-/**
- * Module dependencies.
- */
-
-const chai = require("chai");
-const sinon = require("sinon");
-const gpsi = require("../../../lib/audit-performance-gpsi/index").default;
-
-// End of dependencies.
-
-const expect = chai.expect;
-chai.should();
-chai.use(require("chai-things"));
+import { expect } from "../chai.js";
+import sinon from "sinon";
+import gpsi from "../../lib/audit-performance-gpsi/index.js";
 
 describe("performance-gpsi", function () {
   describe("#_formatDetails()", function () {
-    it("should return undefined", function () {
+    it("should return undefined 1", function () {
       const details = {};
       const results = gpsi._formatDetails(details);
       expect(results).to.be.undefined;
     });
-    it("should return undefined", function () {
+    it("should return undefined 2", function () {
       const details = undefined;
       const results = gpsi._formatDetails(details);
       expect(results).to.be.undefined;
     });
-    it("should return undefined", function () {
+    it("should return undefined 3", function () {
       const details = null;
       const results = gpsi._formatDetails(details);
       expect(results).to.be.undefined;
@@ -208,21 +196,21 @@ describe("performance-gpsi", function () {
     });
   });
   describe("#_formatUrlBlocks()", function () {
-    it("should return an empty array", function () {
+    it("should return an empty array 1", function () {
       const blocks = { urlBlocks: [{}] };
       const results = gpsi._formatUrlBlocks(blocks);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.be.empty;
     });
-    it("should return an empty array", function () {
+    it("should return an empty array 2", function () {
       const blocks = {};
       const results = gpsi._formatUrlBlocks(blocks);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.be.empty;
     });
-    it("should return an empty array", function () {
+    it("should return an empty array 3", function () {
       const blocks = { urlBlocks: [] };
       const results = gpsi._formatUrlBlocks(blocks);
       expect(results).to.exist;
@@ -281,7 +269,7 @@ describe("performance-gpsi", function () {
       const rules = {
         GpsiRule1: {
           localizedRuleName: "local name",
-          ruleImpact: 0,
+          score: 0,
           groups: ["group"],
           summary: {
             format: "1",
@@ -298,7 +286,7 @@ describe("performance-gpsi", function () {
       const rules = {
         GpsiRule1: {
           localizedRuleName: "local name",
-          ruleImpact: 0,
+          score: 0,
           groups: ["group"],
           summary: {
             format: "1",
@@ -307,7 +295,7 @@ describe("performance-gpsi", function () {
         },
         GpsiRule2: {
           localizedRuleName: "local name",
-          ruleImpact: 0,
+          score: 0,
           groups: ["group"],
           summary: {
             format: "1",
@@ -324,7 +312,7 @@ describe("performance-gpsi", function () {
       const rules = {
         GpsiRule1: {
           localizedRuleName: "local name",
-          ruleImpact: 0,
+          score: 0,
           groups: ["group"],
           summary: {
             format: "1",
@@ -337,11 +325,11 @@ describe("performance-gpsi", function () {
       expect(results).to.not.be.undefined;
       expect(results[0].rule).to.equal("GpsiRule1");
     });
-    it("should include set the rules as checked if ruleImpact is 0", function () {
+    it("should include set the rules as checked if score is 1", function () {
       const rules = {
         GpsiRule1: {
           localizedRuleName: "local name",
-          ruleImpact: 0,
+          score: 1,
           groups: ["group"],
           summary: {
             format: "1",
@@ -354,11 +342,11 @@ describe("performance-gpsi", function () {
       expect(results).to.not.be.undefined;
       expect(results[0].check).to.equal(true);
     });
-    it("should include set the rules as not checked if ruleImpact is > 0", function () {
+    it("should include set the rules as not checked if score is < 1", function () {
       const rules = {
         GpsiRule1: {
           localizedRuleName: "local name",
-          ruleImpact: 1,
+          score: 0,
           groups: ["group"],
           summary: {
             format: "1",
@@ -371,7 +359,7 @@ describe("performance-gpsi", function () {
       expect(results).to.not.be.undefined;
       expect(results[0].check).to.equal(false);
     });
-    it("should return an empty object", function () {
+    it("should return an empty object 1", function () {
       const rules = {
         GpsiRule1: {},
       };
@@ -380,7 +368,7 @@ describe("performance-gpsi", function () {
       expect(results).to.not.be.undefined;
       expect(results).to.be.empty;
     });
-    it("should return an empty object", function () {
+    it("should return an empty object 2", function () {
       const rules = {};
       const results = gpsi._format(rules);
       expect(results).to.exist;

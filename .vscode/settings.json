@@ -3,4 +3,6 @@
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
+  "mochaExplorer.files": "./test/**/*Spec.js",
+  "mochaExplorer.exit": true
 }

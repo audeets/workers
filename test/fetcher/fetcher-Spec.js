@@ -1,26 +1,10 @@
-"use strict";
-
-/**
- * Module dependencies.
- */
-
-const chai = require("chai");
-const proxyquire = require("proxyquire");
-const sinon = require("sinon");
-const fetcher = require("../../../lib/fetcher").default;
-var connect = require("connect");
-var serveStatic = require("serve-static");
-const urlLib = require("url");
-const fs = require("fs");
-const path = require("path");
-var finalhandler = require("finalhandler");
-var http = require("http");
-
-// End of dependencies.
-
-const expect = chai.expect;
-chai.should();
-chai.use(require("chai-things"));
+import sinon from "sinon";
+import fetcher from "../../lib/fetcher.js";
+import connect from "connect";
+import serveStatic from "serve-static";
+import urlLib from "url";
+import { expect } from "../chai.js";
+import { URL } from "url";
 
 const port = "9615";
 const invalidURl = "sdsdsqdsqdsqd.html";
@@ -31,14 +15,15 @@ const pause = 3000;
 describe("fetcher", function () {
   describe("#fetch()", function () {
     before(function () {
-      connect()
-        .use(serveStatic(__dirname))
-        .use(function onerror(err, req, res, next) {
-          console.log("Error in server " + err);
-        })
-        .listen(port, () => {
-          console.log("Server running...");
-        });
+      const __dirname = new URL(".", import.meta.url).pathname;
+      const app = connect();
+      app.use(serveStatic(__dirname));
+      app.use(function onerror(err, req, res, next) {
+        console.log("Error in server " + err);
+      });
+      app.listen(port, () => {
+        console.log("Server running...");
+      });
     });
     it("should return an error for an invalid URL", function (done) {
       this.timeout(timeout);
