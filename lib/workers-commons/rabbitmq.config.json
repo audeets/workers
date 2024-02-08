@@ -25,6 +25,26 @@
           }
         },
         "args": {}
+      },
+      {
+        "destination": {
+          "queue": "audit-accessibility-basic",
+          "messageSchema": {},
+          "options": {
+            "noAck": false
+          }
+        },
+        "args": {}
+      },
+      {
+        "destination": {
+          "queue": "audit-security-basic",
+          "messageSchema": {},
+          "options": {
+            "noAck": false
+          }
+        },
+        "args": {}
       }
     ]
   },
