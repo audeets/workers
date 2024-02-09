@@ -1,29 +1,33 @@
 import { expect } from "../chai.js";
 import sinon from "sinon";
-import gpsi from "../../lib/audit-performance-gpsi/index.js";
+import {
+  _formatDetails,
+  _formatUrlBlocks,
+  _format,
+} from "../../lib/audit-performance-gpsi/index.js";
 
 describe("performance-gpsi", function () {
   describe("#_formatDetails()", function () {
     it("should return undefined 1", function () {
       const details = {};
-      const results = gpsi._formatDetails(details);
+      const results = _formatDetails(details);
       expect(results).to.be.undefined;
     });
     it("should return undefined 2", function () {
       const details = undefined;
-      const results = gpsi._formatDetails(details);
+      const results = _formatDetails(details);
       expect(results).to.be.undefined;
     });
     it("should return undefined 3", function () {
       const details = null;
-      const results = gpsi._formatDetails(details);
+      const results = _formatDetails(details);
       expect(results).to.be.undefined;
     });
     it("should return a details object with an no link", function () {
       const details = {
         format: "format_text",
       };
-      const results = gpsi._formatDetails(details);
+      const results = _formatDetails(details);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
@@ -42,7 +46,7 @@ describe("performance-gpsi", function () {
           },
         ],
       };
-      const results = gpsi._formatDetails(details);
+      const results = _formatDetails(details);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
@@ -62,7 +66,7 @@ describe("performance-gpsi", function () {
           },
         ],
       };
-      const results = gpsi._formatDetails(details);
+      const results = _formatDetails(details);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
@@ -82,7 +86,7 @@ describe("performance-gpsi", function () {
           },
         ],
       };
-      const results = gpsi._formatDetails(details);
+      const results = _formatDetails(details);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
@@ -101,7 +105,7 @@ describe("performance-gpsi", function () {
           },
         ],
       };
-      const results = gpsi._formatDetails(details);
+      const results = _formatDetails(details);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
@@ -120,7 +124,7 @@ describe("performance-gpsi", function () {
           },
         ],
       };
-      const results = gpsi._formatDetails(details);
+      const results = _formatDetails(details);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
@@ -139,7 +143,7 @@ describe("performance-gpsi", function () {
           },
         ],
       };
-      const results = gpsi._formatDetails(details);
+      const results = _formatDetails(details);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
@@ -159,7 +163,7 @@ describe("performance-gpsi", function () {
           },
         ],
       };
-      const results = gpsi._formatDetails(details);
+      const results = _formatDetails(details);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
@@ -172,7 +176,7 @@ describe("performance-gpsi", function () {
         format: "format_text",
         args: [{ type: "XXXXXXX", key: "TEST", value: "text" }],
       };
-      const results = gpsi._formatDetails(details, () => {});
+      const results = _formatDetails(details, () => {});
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
@@ -187,7 +191,7 @@ describe("performance-gpsi", function () {
         format: "format_text",
         args: [{ type: type, key: "TEST", value: "text" }],
       };
-      const results = gpsi._formatDetails(details, callback);
+      const results = _formatDetails(details, callback);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
@@ -198,21 +202,21 @@ describe("performance-gpsi", function () {
   describe("#_formatUrlBlocks()", function () {
     it("should return an empty array 1", function () {
       const blocks = { urlBlocks: [{}] };
-      const results = gpsi._formatUrlBlocks(blocks);
+      const results = _formatUrlBlocks(blocks);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.be.empty;
     });
     it("should return an empty array 2", function () {
       const blocks = {};
-      const results = gpsi._formatUrlBlocks(blocks);
+      const results = _formatUrlBlocks(blocks);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.be.empty;
     });
     it("should return an empty array 3", function () {
       const blocks = { urlBlocks: [] };
-      const results = gpsi._formatUrlBlocks(blocks);
+      const results = _formatUrlBlocks(blocks);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.be.empty;
@@ -248,7 +252,7 @@ describe("performance-gpsi", function () {
           },
         ],
       };
-      const results = gpsi._formatUrlBlocks(blocks);
+      const results = _formatUrlBlocks(blocks);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.not.be.empty;
@@ -277,7 +281,7 @@ describe("performance-gpsi", function () {
           },
         },
       };
-      const results = gpsi._format(rules);
+      const results = _format(rules);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.have.lengthOf(1);
@@ -303,7 +307,7 @@ describe("performance-gpsi", function () {
           },
         },
       };
-      const results = gpsi._format(rules);
+      const results = _format(rules);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.have.lengthOf(2);
@@ -320,7 +324,7 @@ describe("performance-gpsi", function () {
           },
         },
       };
-      const results = gpsi._format(rules);
+      const results = _format(rules);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results[0].rule).to.equal("GpsiRule1");
@@ -337,7 +341,7 @@ describe("performance-gpsi", function () {
           },
         },
       };
-      const results = gpsi._format(rules);
+      const results = _format(rules);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results[0].check).to.equal(true);
@@ -354,7 +358,7 @@ describe("performance-gpsi", function () {
           },
         },
       };
-      const results = gpsi._format(rules);
+      const results = _format(rules);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results[0].check).to.equal(false);
@@ -363,14 +367,14 @@ describe("performance-gpsi", function () {
       const rules = {
         GpsiRule1: {},
       };
-      const results = gpsi._format(rules);
+      const results = _format(rules);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.be.empty;
     });
     it("should return an empty object 2", function () {
       const rules = {};
-      const results = gpsi._format(rules);
+      const results = _format(rules);
       expect(results).to.exist;
       expect(results).to.not.be.undefined;
       expect(results).to.be.empty;
