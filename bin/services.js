@@ -12,7 +12,7 @@ program
   .description("Starts the queue identified by the given name")
   .action((name) => {
     createWorker(process.env.URL_AMQP, name, (err) => {
-      log.error("Creating worker process", err);
+      log.error("From worker process", err);
     });
   });
 
