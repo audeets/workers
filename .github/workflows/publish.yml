@@ -51,6 +51,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
+          context: .
           tags: ghcr.io/${{ github.repository }}:latest
           labels: ${{ steps.meta.outputs.labels }}
 
@@ -59,5 +60,6 @@ jobs:
         with:
           file: ./search.Dockerfile
           push: true
+          context: .
           tags: ghcr.io/${{ github.repository_owner	 }}/audeets-search-basic:latest
           labels: ${{ steps.meta.outputs.labels }}
