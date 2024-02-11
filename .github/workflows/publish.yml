@@ -54,10 +54,10 @@ jobs:
           tags: ghcr.io/${{ github.repository }}:latest
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Build and push Docker image for crawler
+      - name: Build and push Docker image for search-basic
         uses: docker/build-push-action@v5
         with:
-          file: ./crawl.Dockerfile
+          file: ./search.Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner	 }}/audeets-crawl:latest
+          tags: ghcr.io/${{ github.repository_owner	 }}/audeets-search-basic:latest
           labels: ${{ steps.meta.outputs.labels }}
