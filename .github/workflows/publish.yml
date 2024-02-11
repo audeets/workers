@@ -47,14 +47,14 @@ jobs:
 
       - run: yarn test
 
-      - name: Build and push Docker image
+      - name: Build and push Docker image for services
         uses: docker/build-push-action@v5
         with:
           push: true
           tags: ghcr.io/${{ github.repository }}:latest
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Build and push Docker image
+      - name: Build and push Docker image for crawler
         uses: docker/build-push-action@v5
         with:
           file: ./crawl.Dockerfile
