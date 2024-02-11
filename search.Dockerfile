@@ -13,7 +13,7 @@ RUN apt-get update \
     && service dbus start \
     && rm -rf /var/lib/apt/lists/* \
     && groupadd -r pptruser && useradd -rm -g pptruser -G audio,video pptruser  
-USER pptruser
+# USER pptruser
 
 # WORKDIR /home/pptruser
 
