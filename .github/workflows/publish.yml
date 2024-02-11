@@ -47,10 +47,17 @@ jobs:
 
       - run: yarn test
 
-      - name: Build and push Docker images
+      - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
           push: true
           tags: ghcr.io/${{ github.repository }}:latest
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          file: ./crawl.Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.repository_owner	 }}/audeets-crawl:latest
           labels: ${{ steps.meta.outputs.labels }}
