@@ -37,7 +37,7 @@
     "morgan": "~1.10.0",
     "node-phantom-simple": "^2.2.4",
     "os": "^0.1.2",
-    "phantom": "^2.1.10",
+    "puppeteer": "^22.0.0",
     "rabbitmq-schema": "^2.0.1",
     "recompose": "^0.30.0",
     "traverse": "^0.6.8",
