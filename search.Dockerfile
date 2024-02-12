@@ -11,20 +11,7 @@ RUN apt-get update \
     && apt-get install -y google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-khmeros fonts-kacst fonts-freefont-ttf libxss1 dbus dbus-x11 \
     --no-install-recommends \
     && service dbus start \
-    && rm -rf /var/lib/apt/lists/* \
-    && groupadd -r pptruser && useradd -rm -g pptruser -G audio,video pptruser  
-# USER pptruser
-
-# WORKDIR /home/pptruser
-
-# COPY puppeteer-browsers-latest.tgz puppeteer-latest.tgz puppeteer-core-latest.tgz ./
-
-# ENV DBUS_SESSION_BUS_ADDRESS autolaunch:
-
-# # Install @puppeteer/browsers, puppeteer and puppeteer-core into /home/pptruser/node_modules.
-# RUN npm i ./puppeteer-browsers-latest.tgz ./puppeteer-core-latest.tgz ./puppeteer-latest.tgz \
-#     && rm ./puppeteer-browsers-latest.tgz ./puppeteer-core-latest.tgz ./puppeteer-latest.tgz \
-#     && (node -e "require('child_process').execSync(require('puppeteer').executablePath() + ' --credits', {stdio: 'inherit'})" > THIRD_PARTY_NOTICES)
+    && rm -rf /var/lib/apt/lists/* 
 
 COPY . /usr/app
 WORKDIR /usr/app
