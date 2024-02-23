@@ -15,13 +15,13 @@
     "start:crawl": "node --env-file=.env ./bin/services.js start crawler"
   },
   "dependencies": {
-    "@benoitquette/audeets-api-commons": "^1.0.14",
+    "@benoitquette/audeets-api-commons": "^1.0.16",
     "ajv": "^8.12.0",
     "amqplib": "^0.10.3",
     "cheerio": "^0.22.0",
     "commander": "^12.0.0",
     "lodash": "^4.17.21",
-    "puppeteer": "^22.0.0",
+    "puppeteer": "^22.2.0",
     "rabbitmq-schema": "^2.0.1",
     "winston": "^3.11.0"
   },
