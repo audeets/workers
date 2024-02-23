@@ -76,24 +76,5 @@
         "args": {}
       }
     ]
-  },
-  {
-    "exchange": "crawl",
-    "type": "fanout",
-    "options": {
-      "durable": true
-    },
-    "bindings": [
-      {
-        "destination": {
-          "queue": "crawler",
-          "messageSchema": {},
-          "options": {
-            "noAck": false
-          }
-        },
-        "args": {}
-      }
-    ]
   }
 ]
