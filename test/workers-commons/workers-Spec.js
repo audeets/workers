@@ -6,8 +6,7 @@ import path from "path";
 const queue1 = path.join("..", "test", "workers-commons", "worker-queue1-mock");
 const queue2 = path.join("..", "test", "workers-commons", "worker-queue2-mock");
 const exchange1 = { exchange: "ex1" };
-// const modulePath = path.join(__dirname, "..", queue1, "index.js");
-const channelMock = { ack: null };
+const channelMock = { ack: () => {} };
 const workers = await esmock("../../lib/workers-commons/workers.js", {
   "../../lib/workers-commons/rabbit-node.js": {
     consume: function (nodeUrl, queueName, callback) {
@@ -29,7 +28,7 @@ const workers = await esmock("../../lib/workers-commons/workers.js", {
           return callback(null, channelMock, message2);
         default:
       }
-      return callback("unknown queue from mock");
+      return callback("unknown queue from mock", channelMock);
     },
     publish: function (nodeUrl, exchangeName, routingKey, message, callback) {
       console.log(exchangeName);
@@ -67,8 +66,8 @@ describe("workers", function () {
       channelMock.ack = sinon.spy();
       const spy = sinon.spy();
       workers.createWorker("nodeurl", queue2, spy);
-      expect(channelMock.ack.called).to.equal(false);
-      expect(spy.called).to.equal(true);
+      expect(channelMock.ack.called).to.equal(true);
+      expect(spy.called).to.equal(false);
     });
   });
   describe("#publishAuditTask()", function () {

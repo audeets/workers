@@ -28,8 +28,8 @@ var node = await esmock("../../lib/workers-commons/rabbit-node.js", {
         case queue1.queue:
           return callback(null, exchange1, queue1, routingKey);
         default:
+          return callback("unknown queue from mock", null, null, null);
       }
-      return callback("unknown queue from mock", null, null, null);
     },
     getExchange: function (name) {
       switch (name) {
