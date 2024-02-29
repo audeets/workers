@@ -12,7 +12,7 @@
     "start:securitybasic": "node --env-file=.env ./bin/services.js start audit-security-basic",
     "start:mongo": "node --env-file=.env ./bin/services.js start store-mongo",
     "start:elastic": "node --env-file=.env ./bin/services.js start store-elasticsearch",
-    "start:crawl": "node --env-file=.env ./bin/services.js start crawler"
+    "recreate-index": "node --env-file=.env ./bin/recreate-index.js"
   },
   "dependencies": {
     "@benoitquette/audeets-api-commons": "^1.0.16",
