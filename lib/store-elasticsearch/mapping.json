@@ -1,18 +1,21 @@
 {
-  "results": {
+  "mappings": {
     "properties": {
       "category": {
-        "type": "string"
+        "type": "keyword"
+      },
+      "rule": {
+        "type": "keyword"
       },
       "timestamp": {
         "type": "date"
       },
       "url": {
-        "type": "string"
+        "type": "text"
       },
       "project": {
-        "type": "string",
-        "index": "not_analyzed"
+        "type": "text",
+        "index": "true"
       }
     }
   }
