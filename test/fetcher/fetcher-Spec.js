@@ -10,7 +10,6 @@ const port = '9615';
 const invalidURl = 'sdsdsqdsqdsqd.html';
 const staticFile = 'www.google.com.html';
 const timeout = 10000;
-const pause = 4000;
 
 describe('fetcher', function () {
   describe('#fetch()', function () {
