@@ -1,9 +1,9 @@
-import log from "./../lib/logger.js";
-import mongoose from "@benoitquette/audeets-api-commons/models/index.js";
-import { process as processResult } from "./../lib/store-elasticsearch/index.js";
+import mongoose from '@benoitquette/audeets-api-commons/models/index.js';
+import log from './../lib/logger.js';
+import { process as processResult } from './../lib/store-elasticsearch/index.js';
 
 mongoose
-  .model("Result")
+  .model('Result')
   .find()
   .then((results) => {
     results.forEach((result) => {
@@ -16,8 +16,8 @@ mongoose
           rule: r.rule,
           title: r.title,
           check: r.check,
-          details: r.details,
-        })),
+          details: r.details
+        }))
       };
       processResult(process.env, resultCopy, (err) => {
         if (err) log.error(err);

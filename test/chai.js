@@ -1,6 +1,6 @@
-import chai from "chai";
-import chaithings from "chai-things";
-import chailike from "chai-like";
+import chai from 'chai';
+import chaithings from 'chai-things';
+import chailike from 'chai-like';
 
 chai.should();
 chai.use(chailike);

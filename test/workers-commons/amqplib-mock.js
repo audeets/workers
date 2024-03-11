@@ -13,7 +13,7 @@ export function connect(url, options, connCallback) {
         setIfUndef(queues, queue, {
           messages: [],
           subscribers: [],
-          options: qOptions,
+          options: qOptions
         });
         qCallback(null, { queue });
       },
@@ -25,39 +25,29 @@ export function connect(url, options, connCallback) {
 
       bindQueue: function (queue, exchange, key, args, bindCallback) {
         bindCallback = bindCallback || function () {};
-        if (!exchanges[exchange])
-          return bindCallback("Bind to non-existing exchange " + exchange);
-        var re =
-          "^" +
-          key
-            .replace(".", "\\.")
-            .replace("#", "(\\w|\\.)+")
-            .replace("*", "\\w+") +
-          "$";
+        if (!exchanges[exchange]) return bindCallback('Bind to non-existing exchange ' + exchange);
+        var re = '^' + key.replace('.', '\\.').replace('#', '(\\w|\\.)+').replace('*', '\\w+') + '$';
         exchanges[exchange].bindings.push({
           regex: new RegExp(re),
-          queueName: queue,
+          queueName: queue
         });
         bindCallback();
       },
 
       publish: function (exchange, routingKey, content, props, pubCallback) {
         pubCallback = pubCallback || function () {};
-        if (!exchanges[exchange])
-          return pubCallback("Publish to non-existing exchange " + exchange);
+        if (!exchanges[exchange]) return pubCallback('Publish to non-existing exchange ' + exchange);
         var bindings = exchanges[exchange].bindings;
         var matchingBindings = bindings.filter(function (b) {
           return b.regex.test(routingKey);
         });
         matchingBindings.forEach(function (binding) {
-          var subscribers = queues[binding.queueName]
-            ? queues[binding.queueName].subscribers
-            : [];
+          var subscribers = queues[binding.queueName] ? queues[binding.queueName].subscribers : [];
           subscribers.forEach(function (sub) {
             var message = {
               fields: { routingKey: routingKey },
               properties: props,
-              content: content,
+              content: content
             };
             sub(message);
           });
@@ -78,7 +68,7 @@ export function connect(url, options, connCallback) {
       ack: function () {},
       nack: function () {},
       prefetch: function () {},
-      on: function () {},
+      on: function () {}
     };
     channelCallback(null, channel);
   };
@@ -86,7 +76,7 @@ export function connect(url, options, connCallback) {
   var connection = {
     createChannel: createChannel,
     createConfirmChannel: createChannel,
-    on: function () {},
+    on: function () {}
   };
 
   connCallback(null, connection);
