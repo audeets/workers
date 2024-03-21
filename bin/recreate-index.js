@@ -1,4 +1,4 @@
-import mongoose from '@benoitquette/audeets-api-commons/models/index.js';
+import mongoose from '@audeets/api-commons/models/index.js';
 import log from './../lib/logger.js';
 import { process as processResult } from './../lib/store-elasticsearch/index.js';
 

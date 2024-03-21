@@ -16,7 +16,7 @@
     "recreate-index": "node --env-file=.env ./bin/recreate-index.js"
   },
   "dependencies": {
-    "@benoitquette/audeets-api-commons": "^1.0.16",
+    "@audeets/api-commons": "^1.0.28",
     "ajv": "^8.12.0",
     "amqplib": "^0.10.3",
     "cheerio": "^0.22.0",
